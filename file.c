@@ -156,10 +156,19 @@ void greater()
 		move++;
 	}
 	fscanf(f,"%f",&x);
+	move=1;
 	if(x>7.5){
 		fseek(f,0,SEEK_SET);
 		c = getc(f);
-		printf("%c",c);
+		while(c!='\n'){
+			fseek(f,move,SEEK_SET);
+			c = getc(f);
+			move++;
+		}
+		while(c!=32){
+			printf("%c",c);	
+			c = getc(f);
+		}
 	}
 	fclose(f);
 }
