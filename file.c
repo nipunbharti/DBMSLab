@@ -65,6 +65,7 @@ void insert()
 		f = fopen("2.txt","w+");
 		while(n<2){
 			printf("For second sem:\n");
+			printf("Enter data for %d student:\n",n+1);
 			enterdata();
 			s.gpa = (s.g1 + s.g2 + s.g3 +s.g4)/4.0;
 			s.cgpa = (s.cgpa + s.gpa)/2;
@@ -73,6 +74,35 @@ void insert()
 		}
 		fclose(f);
 		sem++;
+	}
+	if(sem==2){
+		FILE *f;
+		f = fopen("3.txt","w+");
+		while(n<2){
+			printf("For third sem:\n");
+			printf("Enter data for %d student:\n",n+1);
+			enterdata();
+			s.gpa = (s.g1 + s.g2 + s.g3 +s.g4)/4.0;
+			s.cgpa = (s.cgpa + s.gpa)/2;
+			fprintf(f,"%s %s %c %d %d %d %d %0.2f %0.2f\n",d[n].name,d[n].rollno,d[n].gender,s.g1,s.g2,s.g3,s.g4,s.gpa,s.cgpa);
+			n++;
+		}
+		fclose(f);
+		sem++;
+	}
+	if(sem==3){
+		FILE *f;
+		f = fopen("3.txt","w+");
+		while(n<2){
+			printf("For fourth sem:\n");
+			printf("Enter data for %d student:\n",n+1);
+			enterdata();
+			s.gpa = (s.g1 + s.g2 + s.g3 +s.g4)/4.0;
+			s.cgpa = (s.cgpa + s.gpa)/2;
+			fprintf(f,"%s %s %c %d %d %d %d %0.2f %0.2f\n",d[n].name,d[n].rollno,d[n].gender,s.g1,s.g2,s.g3,s.g4,s.gpa,s.cgpa);
+			n++;
+		}
+		fclose(f);
 	}
 }
 
