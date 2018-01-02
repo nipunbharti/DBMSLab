@@ -2,12 +2,14 @@
 #include <stdlib.h>
 
 struct student{
-	char name[10];
-	char rollno[10];
-	char gender;
 	int g1,g2,g3,g4;
 	float gpa,cgpa;
 }s;
+struct detail{
+	char name[10];
+	char rollno[10];
+	char gender;
+}d[5];
 
 void insert();
 void enterdata();
@@ -35,25 +37,38 @@ int main()
 
 void insert()
 {
-	int sem = 0;
-	float x;
+	int sem=0,n=0;
 	if(sem==0){
 		FILE *f;
-		int n=0;
 		f = fopen("1.txt","w+");
-		while(n<5){
+		while(n<2){
 			printf("Enter data for %d student:\n",n+1);
 			printf("Enter name:\n");
-			scanf("%s",s.name);
+			scanf("%s",d[n].name);
 			printf("Enter the roll no:\n");
-			scanf("%s",s.rollno);
+			scanf("%s",d[n].rollno);
 			printf("Enter the gender: M or F:\n");
-			scanf(" %c",&s.gender);
+			scanf(" %c",&d[n].gender);
+			printf("For first sem:\n");
 			enterdata();
-			s.gpa = (s.g1 + s.g2 + s.g3 +s.g4)/4;
-			s.cgpa = (s.g1 + s.g2 + s.g3 +s.g4)/4;
-			x = s.cgpa;
-			fprintf(f,"%s %s %c %d %d %d %d %0.2f %0.2f\n",s.name,s.rollno,s.gender,s.g1,s.g2,s.g3,s.g4,s.gpa,s.cgpa);
+			s.gpa = (s.g1 + s.g2 + s.g3 +s.g4)/4.0;
+			s.cgpa = s.gpa;
+			fprintf(f,"%s %s %c %d %d %d %d %0.2f %0.2f\n",d[n].name,d[n].rollno,d[n].gender,s.g1,s.g2,s.g3,s.g4,s.gpa,s.cgpa);
+			n++;
+		}
+		fclose(f);
+		sem++;
+	}
+	n=0;
+	if(sem==1){
+		FILE *f;
+		f = fopen("2.txt","w+");
+		while(n<2){
+			printf("For second sem:\n");
+			enterdata();
+			s.gpa = (s.g1 + s.g2 + s.g3 +s.g4)/4.0;
+			s.cgpa = (s.cgpa + s.gpa)/2;
+			fprintf(f,"%s %s %c %d %d %d %d %0.2f %0.2f\n",d[n].name,d[n].rollno,d[n].gender,s.g1,s.g2,s.g3,s.g4,s.gpa,s.cgpa);
 			n++;
 		}
 		fclose(f);
