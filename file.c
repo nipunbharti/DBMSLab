@@ -14,6 +14,7 @@ struct detail{
 void insert();
 void enterdata();
 void greater();
+void check();
 
 int main()
 {
@@ -28,6 +29,10 @@ int main()
 				break;
 			case 2:
 				greater();
+				break;
+			case 3:
+				check();
+				break;
 			case 4:
 				exit(0);
 				break;
@@ -44,7 +49,7 @@ void insert()
 	if(sem==0){
 		FILE *f;
 		f = fopen("1.txt","w+");
-		while(n<2){
+		while(n<5){
 			printf("Enter data for %d student:\n",n+1);
 			printf("Enter name:\n");
 			scanf("%s",d[n].name);
@@ -66,7 +71,7 @@ void insert()
 	if(sem==1){
 		FILE *f;
 		f = fopen("2.txt","w+");
-		while(n<2){
+		while(n<5){
 			printf("For second sem:\n");
 			printf("Enter data for %d student:\n",n+1);
 			enterdata();
@@ -82,7 +87,7 @@ void insert()
 	if(sem==2){
 		FILE *f;
 		f = fopen("3.txt","w+");
-		while(n<2){
+		while(n<5){
 			printf("For third sem:\n");
 			printf("Enter data for %d student:\n",n+1);
 			enterdata();
@@ -98,7 +103,7 @@ void insert()
 	if(sem==3){
 		FILE *f;
 		f = fopen("4.txt","w+");
-		while(n<2){
+		while(n<5){
 			printf("For fourth sem:\n");
 			printf("Enter data for %d student:\n",n+1);
 			enterdata();
@@ -129,46 +134,44 @@ void greater()
 	float x;
 	f = fopen("4.txt","a+");
 	char c;
-	int move=1,space=0;
-	while(space!=8){
-		c = getc(f);
-		if(c == 32){
-			space++;
-		}
-		fseek(f,move,SEEK_SET);
-		move++;
-	}
-	fscanf(f,"%f",&x);
-	if(x>7.5){
-		fseek(f,0,SEEK_SET);
-		c = getc(f);
-		while(c!=32){
-			printf("%c",c);	
+	int move=1,space=0,i=0,r=0;
+	for(i=0;i<5;i++){
+		while(space != 8*(i+1)){
 			c = getc(f);
-		}
-	}
-	while(space!=16){
-		c = getc(f);
-		if(c == 32){
-			space++;
-		}
-		fseek(f,move,SEEK_SET);
-		move++;
-	}
-	fscanf(f,"%f",&x);
-	move=1;
-	if(x>7.5){
-		fseek(f,0,SEEK_SET);
-		c = getc(f);
-		while(c!='\n'){
+			if(c == 32){
+				space++;
+			}
 			fseek(f,move,SEEK_SET);
-			c = getc(f);
 			move++;
 		}
-		while(c!=32){
-			printf("%c",c);	
+		fscanf(f,"%f",&x);
+		if(x>7.5){
+			fseek(f,0,SEEK_SET);
 			c = getc(f);
+			if(i!=0){
+				move=1;
+				while(r<i){
+					while(c!='\n'){
+						fseek(f,move,SEEK_SET);
+						c = getc(f);
+						move++;
+					}
+					c = getc(f);
+					r++;
+				}	
+			}
+			while(c!=32){
+				printf("%c",c);	
+				c = getc(f);
+			}
+			printf("\n");
 		}
+		r=0,space=0,move=1;
 	}
 	fclose(f);
+}
+
+void check()
+{
+
 }
