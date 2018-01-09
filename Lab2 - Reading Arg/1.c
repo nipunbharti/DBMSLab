@@ -31,7 +31,22 @@ void getAll(char s[])
 void getNames(char s[])
 {
 	char c;
+	int move=0;
 	FILE *f;
 	f = fopen(s,"r");
+	fseek(f,0,SEEK_SET);
+	c = getc(f);
+	while(!feof(f)){
+		if(c!=32){
+			printf("%c",c);
+		}
+		else{
+			while(c!='\n'){
+				c = getc(f);
+			}
+			printf("\n");
+		}
+		c = getc(f);
+	}
 	fclose(f);
 }
