@@ -12,6 +12,10 @@ void greater(char s[],char cgpa[]);
 
 int main(int argc, char *argv[])
 {
+	if(argc < 4){
+		printf("Wrong statement\n");
+		return 0;
+	}
 	if(strcmp("Students.txt",argv[4])!=0){
 		printf("File doesn't exist.\n");
 		return 0;
