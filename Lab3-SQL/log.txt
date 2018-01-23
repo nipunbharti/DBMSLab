@@ -1,0 +1,162 @@
+mysql> use college;
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Database changed
+mysql> select * from Books;
++------+--------+-----------+
+| bno  | sem    | ISBN      |
++------+--------+-----------+
+|  100 | Third  | IIITDM100 |
+|  101 | Fourth | IIITDM101 |
+|  102 | Second | IIITDM121 |
+|  103 | Second | IIITDM122 |
+|  104 | Sixth  | IIITDM112 |
++------+--------+-----------+
+5 rows in set (0.00 sec)
+
+mysql> select * from Enroll;
++------+---------+--------+--------+
+| erno | ecno    | sem    | year   |
++------+---------+--------+--------+
+|  101 | COM201T | Third  | Second |
+|  102 | COM202T | Fourth | Second |
+|  103 | COM204T | Fourth | Second |
+|  104 | DES201T | Third  | Second |
+|  105 | DES202T | Fourth | Second |
++------+---------+--------+--------+
+5 rows in set (0.00 sec)
+
+mysql> select * from TextBook;
++-----------+----------------+------------+
+| TISBN     | Title          | Publisher  |
++-----------+----------------+------------+
+| IIITDM200 | Harry potter 1 | JK Rowling |
+| IIITDM201 | Harry potter 2 | JK Rowling |
+| IIITDM202 | Harry potter 3 | JK Rowling |
+| IIITDM203 | Harry potter 4 | JK Rowling |
+| IIITDM204 | Harry potter 5 | JK Rowling |
++-----------+----------------+------------+
+5 rows in set (0.00 sec)
+
+mysql> select * from course;
++---------+----------------------+------+
+| cno     | cname                | dpt  |
++---------+----------------------+------+
+| COM212T | DBMS                 | CED  |
+| MAN202T | Sociology            | CED  |
+| DES203T | IntelligentSystem    | CED  |
+| COM203T | DAA                  | CED  |
+| COM204T | ComputerOrganisation | CED  |
++---------+----------------------+------+
+5 rows in set (0.00 sec)
+
+mysql> select * from students;
++-----------+--------+------+------------+------------+
+| rno       | name   | dept | bdate      | CourseType |
++-----------+--------+------+------------+------------+
+| CED16I026 | Nipun  | CED  | 1998-03-14 | NULL       |
+| CED16I025 | Rahul  | CED  | 1998-04-02 | NULL       |
+| CED16I003 | Akhil  | CED  | 1999-01-17 | NULL       |
+| CED16I028 | Yasho  | CED  | 1998-12-05 | NULL       |
+| CED16I029 | Saurav | CED  | 1997-09-24 | NULL       |
+| NULL      | NULL   | NULL | NULL       | DualDegree |
++-----------+--------+------+------------+------------+
+6 rows in set (0.00 sec)
+
+mysql> alter table students drop column CourseType;
+Query OK, 0 rows affected (0.07 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> select * from students;
++-----------+--------+------+------------+
+| rno       | name   | dept | bdate      |
++-----------+--------+------+------------+
+| CED16I026 | Nipun  | CED  | 1998-03-14 |
+| CED16I025 | Rahul  | CED  | 1998-04-02 |
+| CED16I003 | Akhil  | CED  | 1999-01-17 |
+| CED16I028 | Yasho  | CED  | 1998-12-05 |
+| CED16I029 | Saurav | CED  | 1997-09-24 |
+| NULL      | NULL   | NULL | NULL       |
++-----------+--------+------+------------+
+6 rows in set (0.00 sec)
+
+mysql> update students set name = "Ankita" where rno = "CED16I025";
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from students;
++-----------+--------+------+------------+
+| rno       | name   | dept | bdate      |
++-----------+--------+------+------------+
+| CED16I026 | Nipun  | CED  | 1998-03-14 |
+| CED16I025 | Ankita | CED  | 1998-04-02 |
+| CED16I003 | Akhil  | CED  | 1999-01-17 |
+| CED16I028 | Yasho  | CED  | 1998-12-05 |
+| CED16I029 | Saurav | CED  | 1997-09-24 |
+| NULL      | NULL   | NULL | NULL       |
++-----------+--------+------+------------+
+6 rows in set (0.00 sec)
+
+mysql> DELETE FROM students where rno = "NULL";
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> select * from students;
++-----------+--------+------+------------+
+| rno       | name   | dept | bdate      |
++-----------+--------+------+------------+
+| CED16I026 | Nipun  | CED  | 1998-03-14 |
+| CED16I025 | Ankita | CED  | 1998-04-02 |
+| CED16I003 | Akhil  | CED  | 1999-01-17 |
+| CED16I028 | Yasho  | CED  | 1998-12-05 |
+| CED16I029 | Saurav | CED  | 1997-09-24 |
+| NULL      | NULL   | NULL | NULL       |
++-----------+--------+------+------------+
+6 rows in set (0.00 sec)
+
+mysql> DELETE FROM students where rno = NULL;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> select * from students;
++-----------+--------+------+------------+
+| rno       | name   | dept | bdate      |
++-----------+--------+------+------------+
+| CED16I026 | Nipun  | CED  | 1998-03-14 |
+| CED16I025 | Ankita | CED  | 1998-04-02 |
+| CED16I003 | Akhil  | CED  | 1999-01-17 |
+| CED16I028 | Yasho  | CED  | 1998-12-05 |
+| CED16I029 | Saurav | CED  | 1997-09-24 |
+| NULL      | NULL   | NULL | NULL       |
++-----------+--------+------+------------+
+6 rows in set (0.00 sec)
+
+mysql> DELETE FROM students where rno = "CED16I025";
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from students;
++-----------+--------+------+------------+
+| rno       | name   | dept | bdate      |
++-----------+--------+------+------------+
+| CED16I026 | Nipun  | CED  | 1998-03-14 |
+| CED16I003 | Akhil  | CED  | 1999-01-17 |
+| CED16I028 | Yasho  | CED  | 1998-12-05 |
+| CED16I029 | Saurav | CED  | 1997-09-24 |
+| NULL      | NULL   | NULL | NULL       |
++-----------+--------+------+------------+
+5 rows in set (0.00 sec)
+
+mysql> drop table students;
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> show tables;
++-------------------+
+| Tables_in_college |
++-------------------+
+| Books             |
+| Enroll            |
+| TextBook          |
+| course            |
++-------------------+
+4 rows in set (0.00 sec)
+
+mysql> exit
